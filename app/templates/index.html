@@ -13,7 +13,16 @@
             {%for name, link in zipconten%}
                 <li>{{item}}</li>
                 <a href={{link}}>{{name}}</a> 
+                {% for item in tim%}
+                    <li>{{item}}</li>
+                {% endfor %}
+                
             {% endfor %}
+            {% for item in tim%}
+            <li>{{item}}</li>
+
+            {% endfor %}
+            
         </ul>
     </h1>
 </body>
