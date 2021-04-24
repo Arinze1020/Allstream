@@ -1,6 +1,6 @@
 from app import app
 from collections import OrderedDict
-from flask import render_template
+from flask import render_template,url_for,request
 from bs4 import BeautifulSoup
 import requests 
 import itertools 
@@ -22,17 +22,25 @@ def Home():
         link.append("https://sportshub.fan"+url)
         name.append(teams)
 
-    for time in soup.find_all('span',class_='evdesc'):
-        times = time.text
-        tim.append(times)
+    #for time in soup.find_all('span',class_='evdesc'):
+        #times = time.text
+        #tim.append(times)
 
     
   
-    #link = list(OrderedDict.fromkeys(li))
-    #name = list(OrderedDict.fromkeys(team))
-    #name.remove('live')
+    link = list(OrderedDict.fromkeys(link))
+    name = list(OrderedDict.fromkeys(name))
+    name.remove('live')
     #link + name
     #print(len(name))
     #print(len(name))
     #print(link+name)
-    return render_template("index.html",zipconten = zip(name, link),tim=tim)
+    return render_template("index.html",zipconten = zip(name, link))
+
+
+@app.route('/watch',methods=['GET', 'POST'])
+def watch():
+    selected_url= request.args.get(link)
+    print(selected_url)
+    return render_template("watch.html")
+    
